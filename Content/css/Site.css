@@ -16,7 +16,20 @@ textarea {
     max-width: 280px;
 }
 
-#billing {
+/*#billing {
     margin-top: 50px
+}*/
+
+.upperSection {
+    padding: 10px;
+    border: 1px solid #cfcfcf;
+    margin-top: 20px;
 }
 
+.midSection {
+    border: 1px solid #cfcfcf;
+}
+
+.lowerSection {
+    margin-top: 20px;
+}

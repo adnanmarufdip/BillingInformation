@@ -4,158 +4,92 @@
     var jsonData = ViewBag.productData;
 }
 
-@*<p>
-        @Html.ActionLink("Create New", "Create")
-    </p>*@
-
-
-@*<div class="Row">
-        <div class="col-8">
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UnitPrice)
-                    </th>
-                    <th></th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProductName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UnitPrice)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-    </div>*@
 <div class="row justify-content-center" id="billing">
-    <div class="col-10">
-        <form>
-            <div class="form-group row">
-                <div class="col-md-7">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <label for="date" class="col-md-2 col-form-label">Date</label>
-                                <div class="col-md-8">
-                                    <input type="date" class="form-control" id="date">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <label for="time" class="col-md-2 col-form-label">Time</label>
-                                <div class="col-md-8">
-                                    <input type="time" class="form-control" id="time">
-                                </div>
-                            </div>
-                        </div>
+    <div class="col-12">
+        <form id="myForm">
+            <div class="upperSection">
+                <div class="form-group row">
+                    <label for="date" class="col-md-2 col-form-label">Date</label>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="date" disabled>
                     </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="row d-flex justify-content-between">
-                        <label for="item" class="col-md-2 col-form-label">Item</label>
-                        <div class="col-md-10">
-                            <select class="form-control" id="item">
-                                @*@foreach (var item in Model)
-                                    {
-                                        <option>@Html.DisplayFor(modelItem => item.ProductName)</option>
-                                    }*@
-                            </select>
-                        </div>
+                    <label for="time" class="col-md-2 col-form-label">Time</label>
+                    <div class="col-md-4">
+                        <input type="time" class="form-control" id="time" disabled>
                     </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="row">
-                                <label for="quantity" class="col-md-6 col-form-label">Quantity</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" id="quantity">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="row">
-                                <label for="unit-price" class="col-md-6 col-form-label">Unit/Price</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" id="unitprice">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="row">
-                                <label for="amount" class="col-md-6 col-form-label">Amount</label>
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" id="amount">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Add To Bill</button>
-                <button type="reset" class="btn btn-secondary">Reset</button>
-            </div>
-            <div class="form-group row">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Price/Unit</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Item 1</td>
-                                <td>2</td>
-                                <td>10</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>Item 2</td>
-                                <td>1</td>
-                                <td>15</td>
-                                <td>15</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
                 <div class="form-group row">
-                    <div class="form-group">
-                        <label for="sub-total">Sub Total:</label>
-                        <input type="number" class="form-control" id="sub-total">
+                    <label for="item" class="col-md-2 col-form-label">Item</label>
+                    <div class="col-md-4">
+                        <select class="form-control" id="item">
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="discount">Discount:</label>
-                        <input type="number" class="form-control" id="discount">
+                    <label for="unit-price" class="col-md-2 col-form-label">Price/Unit</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" id="unitprice" disabled>
                     </div>
-                    <div class="form-group">
-                        <label for="vat">VAT:</label>
-                        <input type="number" class="form-control" id="vat">
+                </div>
+                <div class="form-group row">
+                    <label for="quantity" class="col-md-2 col-form-label">Quantity</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" id="quantity" step="1">
                     </div>
-                    <div class="form-group">
-                        <label for="grand-total">Grand Total:</label>
-                        <input type="number" class="form-control" id="grand-total">
+                    <label for="amount" class="col-md-2 col-form-label">Amount</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" id="amount" disabled>
                     </div>
-                    <button type="submit" class="btn btn-primary">Amount Paid &amp; Add New Bill</button>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary" id="addToBill">Add To Bill</button>
+                        <button type="reset" class="btn btn-secondary" id="reset">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <div class="midSection">
+                <table class="table table-striped" id="billTable">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price/Unit</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="lowerSection">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="subtotal">Sub Total:</label>
+                            <input type="number" class="form-control" id="subtotal" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="discount">Discount:</label>
+                            <input type="text" class="form-control" id="discount">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="vat">VAT:</label>
+                            <input type="text" class="form-control" id="vat">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="grandtotal">Grand Total:</label>
+                            <input type="number" class="form-control" id="grandtotal" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary">Amount Paid &amp; Add New Bill</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -165,59 +99,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 
-
     var productData = @Html.Raw(jsonData);
-    var selectElement = $('#item');
-    var unitPriceInput = $('#unitprice');
-
-    console.log(productData);
-
-    $(document).ready(function () {
-        var today = new Date();
-        var year = today.getFullYear();
-        var month = (today.getMonth() + 1).toString().padStart(2, '0');
-        var day = today.getDate().toString().padStart(2, '0');
-        var dateStr = year + '-' + month + '-' + day;
-        $('#date').val(dateStr);
-    });
-
-    $(document).ready(function () {
-        setInterval(function () {
-            var now = new Date();
-            var hours = now.getHours().toString().padStart(2, '0');
-            var minutes = now.getMinutes().toString().padStart(2, '0');
-            var seconds = now.getSeconds().toString().padStart(2, '0');
-            var milliseconds = now.getMilliseconds().toString().padStart(3, '0');
-            var timeString = hours + ':' + minutes;
-            $('#time').val(timeString);
-        }, 10);
-    });
-
-    $(document).ready(function () {
-        var selectElement = $('#item');
-
-        $.each(productData, function (index, product) {
-            selectElement.append($("<option>").attr("value", product.ProductName).text(product.ProductName));
-        });
-
-        updateUnitPrice();
-    });
-
-
-    function updateUnitPrice() {
-        var selectedProduct = productData.find(function (product) {
-            return product.ProductName === selectElement.val();
-        });
-
-        if (selectedProduct) {
-            unitPriceInput.val(selectedProduct.UnitPrice);
-        } else {
-            unitPriceInput.val("");
-        }
-    }
-    selectElement.on("change", function () {
-        updateUnitPrice();
-    });
 
 </script>
 
