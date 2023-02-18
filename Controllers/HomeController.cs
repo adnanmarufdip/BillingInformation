@@ -1,4 +1,5 @@
 ﻿using BillingInformation.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,12 @@ namespace BillingInformation.Controllers
         }
 
         // GET: Products
+        [HttpGet]
         public ActionResult Index()
         {
-            //DataContext dataContext = new DataContext();
-            ModelState.Clear();
-            return View(dataContext.GetProducts());
+            var products = dataContext.GetProducts();
+            ViewBag.productData = JsonConvert.SerializeObject(products);
+            return View(products);
         }
     }
 }
