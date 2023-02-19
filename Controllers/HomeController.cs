@@ -17,13 +17,12 @@ namespace BillingInformation.Controllers
             this.dataContext = new DataContext();
         }
 
-        // GET: Products
+        // GET: Item name and unit price for the dropdown 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult GetItems()
         {
-            var products = dataContext.GetProducts();
-            ViewBag.productData = JsonConvert.SerializeObject(products);
-            return View(products);
+            ViewBag.productData = JsonConvert.SerializeObject(dataContext.GetProducts());
+            return View();
         }
     }
 }
