@@ -63,10 +63,7 @@ namespace BillingInformation.Data
             int queryStatus = cmd.ExecuteNonQuery();
             con.Close();
 
-            if (queryStatus >= 1)
-                return true;
-            else
-                return false;
+            return (queryStatus >= 1) ? true : false;
         }
     }
 }

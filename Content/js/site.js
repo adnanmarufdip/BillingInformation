@@ -7,45 +7,6 @@ var discount = 0;
 var vat = 0.12;
 
 
-// Collect data from the input fields
-$('#addToBill').click(function () {
-
-    if ($('#quantity').val() > 0 && $('#quantity').val() % 1 == 0) {
-
-        var fieldsData = {
-            'date': $('#date').val(),
-            'time': $('#time').val(),
-            'item': $('#item').val(),
-            'unitprice': $('#unitprice').val(),
-            'quantity': $('#quantity').val(),
-            'amount': $('#amount').val()
-        }
-
-        //var x = $('#date').val().split("-").join("/");
-        //console.log(x);
-
-        // convert fields data to JSON data
-        var jsonData = JSON.stringify(fieldsData);
-        console.log(jsonData);
-
-        // post JSON data to web API*   
-        $.ajax({
-            url: 'https://localhost:44364/api/user',
-            type: 'POST',
-            data: jsonData,
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function () {
-                $("#UserForm")[0].reset(); // Resetting the form 
-                alert("Success");
-            },
-            error: function () {
-                $("#UserForm")[0].reset(); // Resetting the form 
-                alert("Failed");
-            }
-        });
-    }
-});
 
 // Inserting data automaticlly during page load
 $(document).ready(function () {
@@ -137,6 +98,36 @@ $('#addToBill').click(function (event) {
         subtotal += parseFloat(amount);
         $('#subtotal').val(subtotal.toFixed(2));
         updateGrandTotal();
+
+        // Getting all the fields data
+        var fieldsData = {
+            'ProductName': $('#item').val(),
+            'UnitPrice': $('#unitprice').val(),
+            'Quantity': $('#quantity').val(),
+            'Amount': $('#amount').val(),
+            'Date': $('#date').val(),
+            'Time': $('#time').val()
+        }
+
+        // convert fields data to JSON data
+        var jsonData = JSON.stringify(fieldsData);
+
+         //post JSON data to AddNewBill method for saving it in the database*   
+        $.ajax({
+            type: 'POST',
+            url: '/Home/AddNewBill',
+            data: jsonData,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (result) {
+                //alert('Data saved successfully!');
+            },
+            error: function (xhr, status, error) {
+                alert('Error occurred while saving data: ' + error);
+            }
+        });
+
+        // resetting the form fields
         resetValues();
     }
 });

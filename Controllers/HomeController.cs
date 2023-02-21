@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Http;
+
 
 namespace BillingInformation.Controllers
 {
@@ -19,7 +21,7 @@ namespace BillingInformation.Controllers
         }
 
         // GET: Item name and unit price for the dropdown 
-        [HttpGet]
+        [System.Web.Http.HttpGet]
         public ActionResult GetItems()
         {
             ViewBag.productData = JsonConvert.SerializeObject(dataContext.GetProducts());
@@ -27,19 +29,26 @@ namespace BillingInformation.Controllers
         }
 
 
-        public ActionResult AddNewBill()
-        {
-            return View();
-        }
+        //public ActionResult AddNewBill()
+        //{
+        //    return View();
+        //}
 
 
         // POST: Creating new bill
-        [HttpPost]
-        public ActionResult AddNewBill(BillModel billModel)
+        [System.Web.Http.HttpPost]
+        public ActionResult AddNewBill([FromBody] BillModel billModel)
         {
-            dataContext.AddBill(billModel);
-            //ViewBag.BillState = "Bill added";
-            return View();
+            bool result = dataContext.AddBill(billModel);
+
+            if (result)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false });
+            }
         }
     }
 }
