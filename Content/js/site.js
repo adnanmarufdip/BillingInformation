@@ -1,13 +1,31 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿"use strict";
 
 var selectElement = $('#item');
 var unitPriceInput = $('#unitprice');
 var subtotal = 0;
 var discount = 0;
 var vat = 0.12;
+
+
+// Collect data from the input fields
+$('#addToBill').click(function () {
+
+    if ($('#quantity').val() > 0 && $('#quantity').val() % 1 == 0) {
+
+        var fieldsData = {
+            'date': $('#date').val(),
+            'time': $('#time').val(),
+            'item': $('#item').val(),
+            'unitprice': $('#unitprice').val(),
+            'quantity': $('#quantity').val(),
+            'amount': $('#amount').val()
+        }
+
+        // convert fields data to JSON data
+        var jsonData = JSON.stringify(fieldsData);
+        console.log(jsonData);
+    }
+});
 
 // Inserting data automaticlly during page load
 $(document).ready(function () {
@@ -138,3 +156,5 @@ function updateGrandTotal() {
     var grandTotal = (subtotal - subtotal * discount) * (1 + vat);
     $('#grandtotal').val(grandTotal.toFixed(2));
 }
+
+
