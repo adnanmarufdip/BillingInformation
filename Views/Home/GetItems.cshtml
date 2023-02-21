@@ -1,8 +1,4 @@
-﻿@{
-    var jsonData = ViewBag.productData;
-}
-
-<div class="row justify-content-center" id="billing">
+﻿<div class="row justify-content-center" id="billing">
     <div class="col-12">
         <form id="myForm">
             <div class="upperSection">
@@ -97,7 +93,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
 
-    var productData = @Html.Raw(jsonData);
+    var productData = @Html.Raw(ViewBag.productData);
 
 </script>
 
