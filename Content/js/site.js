@@ -21,9 +21,29 @@ $('#addToBill').click(function () {
             'amount': $('#amount').val()
         }
 
+        //var x = $('#date').val().split("-").join("/");
+        //console.log(x);
+
         // convert fields data to JSON data
         var jsonData = JSON.stringify(fieldsData);
         console.log(jsonData);
+
+        // post JSON data to web API*   
+        $.ajax({
+            url: 'https://localhost:44364/api/user',
+            type: 'POST',
+            data: jsonData,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function () {
+                $("#UserForm")[0].reset(); // Resetting the form 
+                alert("Success");
+            },
+            error: function () {
+                $("#UserForm")[0].reset(); // Resetting the form 
+                alert("Failed");
+            }
+        });
     }
 });
 

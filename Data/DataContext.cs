@@ -45,5 +45,28 @@ namespace BillingInformation.Data
 
             return productList;
         }
+
+        public bool AddBill(BillModel billModel)
+        {
+            connection();
+            SqlCommand cmd = new SqlCommand("AddNewBill", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@ProductName", billModel.ProductName);
+            cmd.Parameters.AddWithValue("@UnitPrice", billModel.UnitPrice);
+            cmd.Parameters.AddWithValue("@Quantity", billModel.Quantity);
+            cmd.Parameters.AddWithValue("@Amount", billModel.Amount);
+            cmd.Parameters.AddWithValue("@Date", billModel.Date);
+            cmd.Parameters.AddWithValue("@Time", billModel.Time);
+
+            con.Open();
+            int queryStatus = cmd.ExecuteNonQuery();
+            con.Close();
+
+            if (queryStatus >= 1)
+                return true;
+            else
+                return false;
+        }
     }
 }
