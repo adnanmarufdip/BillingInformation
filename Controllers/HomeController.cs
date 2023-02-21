@@ -29,26 +29,12 @@ namespace BillingInformation.Controllers
         }
 
 
-        //public ActionResult AddNewBill()
-        //{
-        //    return View();
-        //}
-
-
         // POST: Creating new bill
         [System.Web.Http.HttpPost]
         public ActionResult AddNewBill([FromBody] BillModel billModel)
         {
             bool result = dataContext.AddBill(billModel);
-
-            if (result)
-            {
-                return Json(new { success = true });
-            }
-            else
-            {
-                return Json(new { success = false });
-            }
+            return (result) ? Json(new { success = true }) : Json(new { success = false });
         }
     }
 }
